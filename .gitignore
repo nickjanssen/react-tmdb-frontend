@@ -1,0 +1,5 @@
+node_modules
+dist
+dist/*
+!dist/.keep
+.DS_Store
