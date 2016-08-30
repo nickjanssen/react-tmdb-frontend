@@ -1,4 +1,5 @@
 {
+  "parser": "babel-eslint",
   "extends": "plugin:react/recommended",
   "rules": {
     "indent":[2, 2, {"SwitchCase": 1}],
@@ -42,6 +43,7 @@
   ],
   "parserOptions": {
     "ecmaFeatures": {
+      "classes": true,
       "jsx": true
     },
     "sourceType": "module"
