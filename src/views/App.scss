@@ -1,0 +1,13 @@
+
+@import '../variables';
+
+.me-app {
+  height: 100%;
+  display: flex;
+}
+
+.me-app-route-wrapper {
+  background: $darkgray;
+  display: flex;
+  flex: 1;
+}

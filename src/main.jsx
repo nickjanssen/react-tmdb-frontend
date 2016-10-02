@@ -3,11 +3,11 @@ import React from 'react'
 import ReactDom from 'react-dom'
 import { Router, Route, Link, browserHistory, IndexRedirect } from 'react-router'
 import App from './views/App.jsx'
+import AllMoviesList from './views/AllMoviesList.jsx'
 
 import './main.scss'
 
 const NoMatch = () => <div>404</div>
-const AllMoviesList = () => <div>AllMoviesList</div>
 const WatchList = () => <div>WatchList</div>
 const MovieDetail = () => <div>MovieDetail</div>
 

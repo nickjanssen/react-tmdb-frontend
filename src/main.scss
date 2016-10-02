@@ -5,11 +5,11 @@ html, body, #app {
   height: 100%;
   width: 100%;
   margin: 0;
-  font-family: 'Open Sans', sans-serif;
   overflow: hidden;
 }
 
-.me-app {
-  height: 100%;
-  display: flex;
+body, input {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  color: gray;
 }
