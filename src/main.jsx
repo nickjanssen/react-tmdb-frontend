@@ -6,6 +6,7 @@ import App from './views/App.jsx'
 import AllMoviesList from './views/AllMoviesList.jsx'
 
 import './main.scss'
+import './misc/scrollbar.scss'
 
 const NoMatch = () => <div>404</div>
 const WatchList = () => <div>WatchList</div>
