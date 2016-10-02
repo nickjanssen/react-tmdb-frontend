@@ -1,7 +1,7 @@
 
 import React from 'react'
 import ReactDom from 'react-dom'
-import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router'
+import { Router, Route, Link, browserHistory, IndexRedirect } from 'react-router'
 import App from './App.jsx'
 
 import './main.scss'
@@ -14,7 +14,7 @@ const MovieDetail = () => <div>MovieDetail</div>
 ReactDom.render(
   <Router history={browserHistory}>
     <Route path="/" component={App}>
-      <IndexRoute component={AllMoviesList}/>
+      <IndexRedirect to="/all" />
       <Route path="all" component={AllMoviesList}>
         <Route path="/movie/:movieId" component={MovieDetail}/>
       </Route>
