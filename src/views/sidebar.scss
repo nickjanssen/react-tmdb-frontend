@@ -24,6 +24,8 @@
 }
 
 .me-sidebar__button--active {
-  background: $darkgray;
+  background: $darkergray;
   color: $yellow;
+  position: relative;
+  width: 90px;
 }
