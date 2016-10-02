@@ -2,7 +2,7 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 import { Router, Route, Link, browserHistory, IndexRedirect } from 'react-router'
-import App from './App.jsx'
+import App from './views/App.jsx'
 
 import './main.scss'
 
