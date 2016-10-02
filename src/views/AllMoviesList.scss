@@ -4,9 +4,21 @@
   flex: 1;
   padding-left: 30px;
   padding-right: 30px;
+  display: flex;
+  flex-direction: column;
 }
 
 .me-all__header {
+
+}
+
+.me-all__content {
+  flex: 1;
+  // background: red;
+  overflow: auto;
+}
+
+.me-all__header__row {
   display: flex;
 }
 
@@ -46,4 +58,8 @@
   position: absolute;
   top: 2px;
   left: 8px;
+}
+
+.me-all__movies {
+  background: red;
 }

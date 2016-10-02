@@ -28,5 +28,11 @@ module.exports = {
 
   resolve: {
     extensions: ['', '.js', '.jsx']
-  }
+  },
+
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.TMDB_API_KEY': `'${process.env.TMDB_API_KEY}'`
+    })
+  ]
 }

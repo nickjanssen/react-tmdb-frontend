@@ -1,0 +1,17 @@
+
+.me-movie {
+  width: 160px;
+  font-size: 12px;
+  margin-right: 60px;
+  display: inline-block;
+}
+
+.me-movie__poster {
+  width: 100%;
+}
+
+.me-movie__details {
+  font-size: 12px;
+  overflow: auto;
+  height: 80px;
+}
