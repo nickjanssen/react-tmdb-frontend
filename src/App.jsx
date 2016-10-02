@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
+import Sidebar from './Sidebar'
 
 export default class App extends Component {
+  static propTypes = {
+    children: React.PropTypes.any
+  }
   render() {
     return (
-      <div>
-        Hello, world!
+      <div className="me-app">
+        <Sidebar />
+        {this.props.children}
       </div>
     )
   }

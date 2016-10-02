@@ -1,11 +1,27 @@
 
 import React from 'react'
 import ReactDom from 'react-dom'
+import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router'
 import App from './App.jsx'
 
 import './main.scss'
 
+const NoMatch = () => <div>404</div>
+const AllMoviesList = () => <div>AllMoviesList</div>
+const WatchList = () => <div>WatchList</div>
+const MovieDetail = () => <div>MovieDetail</div>
+
 ReactDom.render(
-  <App />,
+  <Router history={browserHistory}>
+    <Route path="/" component={App}>
+      <IndexRoute component={AllMoviesList}/>
+      <Route path="all" component={AllMoviesList}>
+        <Route path="/movie/:movieId" component={MovieDetail}/>
+      </Route>
+      <Route path="watchlist" component={WatchList}>
+      </Route>
+      <Route path="*" component={NoMatch}/>
+    </Route>
+  </Router>,
   document.getElementById('app')
 )
