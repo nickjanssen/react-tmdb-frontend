@@ -1,17 +1,46 @@
+@import '../variables';
 
 .me-movie {
   width: 160px;
   font-size: 12px;
   margin-right: 60px;
   display: inline-block;
+  position: relative;
 }
 
 .me-movie__poster {
   width: 100%;
+  height: 240px;
+}
+
+.me-movie__poster__score {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  padding-top: 9px;
+  text-align: center;
+  box-sizing: border-box;
+  position: absolute;
+  right: -15px;
+  top: 190px;
+  color: $darkergray;
+  font-weight: bold;
+  font-size: 11px;
+  background: rgb(245,228,6); /* Old browsers */
+  background: -moz-linear-gradient(top,  rgba(245,228,6,1) 0%, rgba(192,180,9,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  rgba(245,228,6,1) 0%,rgba(192,180,9,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  rgba(245,228,6,1) 0%,rgba(192,180,9,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
 .me-movie__details {
   font-size: 12px;
   overflow: auto;
-  height: 80px;
+  height: 100px;
+}
+
+.me-movie__details__title {
+  font-weight: 700;
+  color: $lightergray;
+  margin-top: 8px;
+  margin-bottom: 4px;
 }

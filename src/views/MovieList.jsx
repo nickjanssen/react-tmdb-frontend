@@ -11,21 +11,22 @@ export default class MovieList extends Component {
     super(props)
   }
   render() {
-    console.log(this.props.genres)
     return (
       <div className="me-movie-list">
         {this.props.movies && this.props.movies.results.map(m => {
-
-
-
+          const average = Math.round(m.vote_average * 10) / 10
           return <div className="me-movie" key={m.id}>
+            <div className="me-movie__poster__score">{average}</div>
             <img className="me-movie__poster" src={`https://image.tmdb.org/t/p/w300${m.poster_path}`}/>
             <div className="me-movie__details">
-              <b>{m.title}</b><br />
-              <span>{this.props.genres
+              <div className="me-movie__details__title">
+                {m.title}
+              </div>
+              <div className="me-movie__details__genres">
+                {this.props.genres
                   .filter(g => m.genre_ids.indexOf(g.id) !== -1)
                   .map(g => g.name).join(', ')}
-              </span>
+              </div>
             </div>
           </div>
         })}
