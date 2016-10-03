@@ -8,8 +8,27 @@ html, body, #app {
   overflow: hidden;
 }
 
-body, input {
+body, input, button {
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   color: gray;
+}
+
+.me-button {
+  height: 40px;
+  background: $darkergray;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: 0;
+}
+
+.me-button-primary {
+  color: $darkergray;
+  background: $yellow;
+}
+
+.me-button-flex {
+  flex: 1;
+  margin: 0 10px;
 }

@@ -25,7 +25,7 @@ export default class Sidebar extends Component {
   render() {
     return (
       <div className="me-sidebar">
-        <img src="images/logo.png" className="me-sidebar__logo" />
+        <img src="/images/logo.png" className="me-sidebar__logo" />
         <TabButton icon="fa-list-ul" route="/all" currentRoute={this.props.currentRoute} />
         <TabButton icon="fa-star-o" route="/watchlist" currentRoute={this.props.currentRoute} />
       </div>

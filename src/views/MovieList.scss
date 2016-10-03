@@ -13,7 +13,17 @@
   height: 240px;
 }
 
+.me-movie__poster {
+  opacity: 0.85;
+  z-index: 1;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
 .me-movie__poster__score {
+  z-index: 2;
   width: 35px;
   height: 35px;
   border-radius: 50%;
@@ -39,8 +49,14 @@
 }
 
 .me-movie__details__title {
-  font-weight: 700;
-  color: $lightergray;
-  margin-top: 8px;
-  margin-bottom: 4px;
+  a {
+    font-weight: 700;
+    color: $lightergray;
+    margin-top: 8px;
+    margin-bottom: 4px;
+    text-decoration: none;
+  }
+  a:hover {
+    color: white;
+  }
 }
