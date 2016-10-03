@@ -5,7 +5,18 @@
 }
 
 .me-movie-detail__main-left {
-  width: 400px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.me-movie-detail__main-left__fixed-wrapper {
+  height: 390px;
+}
+
+.me-movie-detail__main-left__scrollable-wrapper {
+  flex: 1;
+  overflow: auto;
 }
 
 .me-movie-detail__main-left__main-poster {
@@ -36,4 +47,36 @@
 .me-movie-detail__main-left__buttons {
   display: flex;
   margin: 0 -10px;
+}
+
+.me-movie-detail__main-left__backdrops {
+  padding-left: 20px;
+  padding-right: 5px;
+}
+
+.me-movie-detail__main-left__backdrop__row {
+  height: 100px;
+  display: flex;
+  margin: 0 -3px;
+  margin-bottom: 6px;
+}
+
+.me-movie-detail__main-left__backdrop {
+  height: 100px;
+  margin: 0 3px;
+  background-position: center;
+  background-size: cover;
+  border: 2px solid $darkergray;
+  opacity: 0.35;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.me-movie-detail__main-left__backdrop-wide {
+  flex: 2;
+}
+
+.me-movie-detail__main-left__backdrop-narrow {
+  flex: 1;
 }
