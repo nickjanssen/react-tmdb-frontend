@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import MovieList from './MovieList'
 import classnames from 'classnames'
+import { browserHistory } from 'react-router'
+import { Circle } from 'rc-progress'
 
 import './MovieDetail.scss'
 
@@ -55,6 +57,8 @@ export default class MovieDetail extends Component {
 
       const previewBackdrops = i.backdrops.splice(1)
 
+      const average = Math.round(m.vote_average * 10) / 10
+
       // Put in a columns/rows format
       const previewBackdropsFormatted = []
       for (let i = 0; i < previewBackdrops.length; i += 2) {
@@ -102,7 +106,44 @@ export default class MovieDetail extends Component {
           </div>
         </div>
         <div className="me-movie-detail__main-right">
-          right
+          <div className="me-movie-detail__main-right__info">
+            <a className="me-back-link" onClick={browserHistory.goBack}><i className="fa fa-chevron-circle-left" aria-hidden="true"></i> Back to list</a>
+            <h1 className="me-movie-detail__main-right__info__title">{m.title} <span className="me-movie-detail__main-right__info__year">({m.release_date.split('-')[0]})</span></h1>
+            <div className="me-movie-detail__main-right__info__desc">
+              {m.overview}
+            </div>
+            <div className="me-movie-detail__main-right__info__scoretable">
+              <div className="score">
+                <div className="circle-wrapper">
+                  <Circle percent={average * 10}
+                    trailWidth="10"
+                    trailColor="#292929"
+                    strokeWidth="10"
+                    strokeColor="#fae906"
+                    strokeLinecap="square"/>
+                  <div className="value"><span>{average}</span></div>
+                </div>                
+              </div>
+              <div className="table">
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>Genre</td>
+                      <td className="detail">{m.genres.map(g => g.name).join(', ')}</td>
+                    </tr>
+                    <tr>
+                      <td>Release date</td>
+                      <td className="detail">{m.release_date}</td>
+                    </tr>
+                    <tr>
+                      <td>Duration</td>
+                      <td className="detail">{m.runtime} min</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     }
