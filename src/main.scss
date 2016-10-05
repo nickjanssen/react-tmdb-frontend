@@ -36,15 +36,6 @@ body, input, button {
   }
 }
 
-.me-button-info {
-  color: white;
-  background: $info;
-
-  &:hover {
-    background: darken($info, 20%);
-  }
-}
-
 .me-button-flex {
   flex: 1;
   margin: 0 10px;
@@ -56,4 +47,61 @@ body, input, button {
 
 a, .me-button {
   cursor: pointer;
+}
+
+.me-modal__backdrop {
+  background: rgba(0, 0, 0, 0.59);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.me-modal {
+  width: 640px;
+  height: 340px;
+  position: relative;
+}
+
+.me-modal__video {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.me-modal__image {
+  width: 100%;
+}
+
+.me-modal__go-left, .me-modal__go-right, .me-modal__close {
+  position: absolute;
+  .fa {
+    font-size: 40px;
+    &:hover {
+      color: $yellow;
+      cursor: pointer;
+    }
+  }
+}
+
+.me-modal__go-left {
+  left: -50px;
+  top: 135px;
+}
+
+.me-modal__go-right {
+  right: -50px;
+  top: 135px;
+}
+
+.me-modal__close {
+  right: -40px;
+  top: -40px;
+
+  .fa {
+    font-size: 30px;
+  }
 }

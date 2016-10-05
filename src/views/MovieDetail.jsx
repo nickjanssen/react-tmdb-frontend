@@ -19,34 +19,31 @@ export default class MovieDetail extends Component {
     this.state = {
       movie: null,
       images: null,
-      credits: null
+      credits: null,
+      videos: null,
+      slideshow: null
     }
   }
-  componentDidMount() {
-    fetch(`https://api.themoviedb.org/3${`/movie/${this.props.params.movieId}`}?api_key=${process.env.TMDB_API_KEY}`)
+  getMovieProp(prop, index) {
+    fetch(`https://api.themoviedb.org/3${`/movie/${this.props.params.movieId}${index}`}?api_key=${process.env.TMDB_API_KEY}`)
     .then(r => r.json())
     .then(blob => {
-      this.setState({
-        movie: blob
-      })
-    })
-    fetch(`https://api.themoviedb.org/3${`/movie/${this.props.params.movieId}/images`}?api_key=${process.env.TMDB_API_KEY}`)
-    .then(r => r.json())
-    .then(blob => {
-      this.setState({
-        images: blob
-      })
-    })
-    fetch(`https://api.themoviedb.org/3${`/movie/${this.props.params.movieId}/credits`}?api_key=${process.env.TMDB_API_KEY}`)
-    .then(r => r.json())
-    .then(blob => {
-      this.setState({
-        credits: blob
-      })
+      const stateChanges = {}
+      stateChanges[prop] = blob
+      this.setState(stateChanges)
     })
   }
+  componentDidMount() {
+    this.getMovieProp('movie', '')
+    this.getMovieProp('images', '/images')
+    this.getMovieProp('credits', '/credits')
+    this.getMovieProp('videos', '/videos')
+  }
   render() {
-    const isLoading = this.state.movie === null || this.state.images === null || this.state.credits === null
+    const isLoading = this.state.movie === null ||
+    this.state.images === null ||
+    this.state.videos === null ||
+    this.state.credits === null
 
     if (isLoading) {
       return <div className="me-loading">
@@ -58,7 +55,7 @@ export default class MovieDetail extends Component {
       const i = this.state.images
       const c = this.state.credits
 
-      const previewBackdrops = [...i.backdrops].splice(1)
+      const previewBackdrops = [...i.backdrops]
 
       const average = Math.round(m.vote_average * 10) / 10
 
@@ -69,6 +66,8 @@ export default class MovieDetail extends Component {
       }
 
       const isOnWatchlist = this.props.watchlist.find((wlMovie) => wlMovie.id === m.id)
+
+      const videos = this.state.videos.results.filter(m => m.site === 'YouTube')
 
       return <div className="me-movie-detail">
         <div className="me-movie-detail__main-left">
@@ -84,12 +83,19 @@ export default class MovieDetail extends Component {
                 }}>
                   Add to Watchlist
                 </button>}
-                {isOnWatchlist && <button className={classnames('me-button me-button-flex me-button-info')} onClick={() => {
+                {isOnWatchlist && <button className={classnames('me-button me-button-flex')} onClick={() => {
                   this.props.emitter.emit('removeFromWatchList', m)
                 }}>
                   Remove from Watchlist
                 </button> }
-                <button className={classnames('me-button me-button-flex me-button-regular')}>
+                <button className={classnames('me-button me-button-flex me-button-regular')} onClick={() => {
+                  this.setState({
+                    slideshow: {
+                      type: 'trailer',
+                      index: 0
+                    }
+                  })
+                }}>
                   Watch trailer
                 </button>
               </div>
@@ -104,14 +110,28 @@ export default class MovieDetail extends Component {
                     'me-movie-detail__main-left__backdrop-narrow': i % 2 === 1
                   })} style={{
                     backgroundImage: `url(https://image.tmdb.org/t/p/w600${bD[0].file_path})`
-                  }} />
+                  }} onClick={() => {
+                    this.setState({
+                      slideshow: {
+                        type: 'image',
+                        index: i * 2
+                      }
+                    })
+                  }}/>
 
                   {bD[1] && <div className={classnames('me-movie-detail__main-left__backdrop', {
                     'me-movie-detail__main-left__backdrop-wide': i % 2 === 1,
                     'me-movie-detail__main-left__backdrop-narrow': i % 2 === 0
                   })}  style={{
                     backgroundImage: `url(https://image.tmdb.org/t/p/w600${bD[1].file_path})`
-                  }} />}
+                  }} onClick={() => {
+                    this.setState({
+                      slideshow: {
+                        type: 'image',
+                        index: (i * 2) + 1
+                      }
+                    })
+                  }}/>}
                 </div>
               })}
             </div>
@@ -173,6 +193,42 @@ export default class MovieDetail extends Component {
             </table>
           </div>
         </div>
+        {this.state.slideshow && <div className="me-modal__backdrop">
+          <div className="me-modal">
+            {this.state.slideshow.type === 'image' && this.state.slideshow.index > 0 && <div className="me-modal__go-left" onClick={() => {
+              this.setState({
+                slideshow: {
+                  type: 'image',
+                  index: this.state.slideshow.index - 1
+                }
+              })
+            }}>
+              <i className="fa fa-chevron-circle-left" aria-hidden="true"></i>
+            </div>}
+            {this.state.slideshow.type === 'image' && this.state.slideshow.index < previewBackdrops.length - 1 && <div className="me-modal__go-right" onClick={() => {
+              this.setState({
+                slideshow: {
+                  type: 'image',
+                  index: this.state.slideshow.index + 1
+                }
+              })
+            }}>
+              <i className="fa fa-chevron-circle-right" aria-hidden="true"></i>
+            </div>}
+            <div className="me-modal__close" onClick={() => {
+              this.setState({
+                slideshow: null
+              })
+            }}>
+              <i className="fa fa-times" aria-hidden="true"></i>
+            </div>
+            {this.state.slideshow.type === 'trailer' && <iframe className="me-modal__video"
+              src={`https://www.youtube.com/embed/${videos[this.state.slideshow.index].key}?autoplay=1`}
+            allowFullScreen></iframe>}
+            {this.state.slideshow.type === 'image' && <img className="me-modal__image"
+              src={`https://image.tmdb.org/t/p/w1000${previewBackdrops[this.state.slideshow.index].file_path}`} />}
+          </div>
+        </div>}
       </div>
     }
   }
