@@ -16,7 +16,7 @@ export default class MovieList extends Component {
       <div className="me-movie-list">
         {this.props.movies.map(m => {
           const average = Math.round(m.vote_average * 10) / 10
-          return <div className="me-movie" key={m.id}>
+          return m.poster_path && <div className="me-movie" key={m.id}>
             <div className="me-movie__poster__score">{average}</div>
             <img onClick={() => {
               browserHistory.push(`/movie/${m.id}`)
