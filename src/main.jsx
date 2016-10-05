@@ -9,6 +9,7 @@ import MovieDetail from './views/MovieDetail.jsx'
 
 import './main.scss'
 import './misc/scrollbar.scss'
+import './misc/react-select.scss'
 
 const NoMatch = () => <div>404</div>
 

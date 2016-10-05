@@ -61,3 +61,27 @@
     color: white;
   }
 }
+
+.me-movie-list__filter {
+  width: 300px;
+}
+
+.me-movie-list__order {
+  width: 300px;
+}
+
+.me-all__header__row {
+  margin-bottom: 20px;
+}
+
+.me-movie-list__filter, .me-movie-list__order {
+  .label {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 10px;
+  }
+  .Select {
+    display: inline-block;
+    width: 200px;
+  }
+}

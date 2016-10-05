@@ -74,7 +74,7 @@ export default class MovieDetail extends Component {
         <div className="me-movie-detail__main-left">
           <div className="me-movie-detail__main-left__fixed-wrapper">
             <div className="me-movie-detail__main-left__main-poster" style={{
-              backgroundImage: `url(https://image.tmdb.org/t/p/w600${i.backdrops[0].file_path})`
+              backgroundImage: `url(https://image.tmdb.org/t/p/w600${m.poster_path})`
             }} />
             <div className="me-movie-detail__main-left__main-poster--border"/>
             <div className="me-movie-detail__main-left__details">
