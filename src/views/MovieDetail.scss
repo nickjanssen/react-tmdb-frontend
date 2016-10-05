@@ -131,7 +131,7 @@
       color: white;
     }
   }
-  .table {
+  table {
     flex: 1;
     td {
       height: 30px;
@@ -139,6 +139,34 @@
     .detail {
       padding-left: 20px;
       color: white;
+    }
+  }
+}
+
+.me-movie-detail__main-right__crew {
+  flex: 1;
+  overflow: auto;
+  margin-right: 20px;
+  table {
+    margin: 0 auto;
+    td {
+      height: 30px;
+      padding-top: 10px;
+    }
+    .detail {
+      padding-left: 20px;
+      color: white;
+    }
+    .info {
+      padding-left: 20px;
+    }
+    .photo {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-size: cover;
+      background-position: center;
+      border: 5px solid $darkergray;
     }
   }
 }
