@@ -1,11 +1,11 @@
 {
-  "name": "nick-react-starter",
+  "name": "react-tmdb-frontend",
   "version": "1.0.0",
   "description": "Run `npm install`.",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --content-base ./static --hot --history-api-fallback",
-    "build": "cp -r static/* dist/ && webpack",
+    "build": "cp -r static/* dist/ && webpack --config webpack.config.prod.js",
     "test": "node ./node_modules/ava/cli.js  --require 'babel-register'"
   },
   "author": "Nick Janssen",

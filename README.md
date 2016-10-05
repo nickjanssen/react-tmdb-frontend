@@ -1,3 +1,5 @@
+# TMDB Movie Explorer using React
+
 ## Quick start
 
 Run `npm install`.
