@@ -6,7 +6,7 @@ import './MovieList.scss'
 export default class MovieList extends Component {
   static propTypes = {
     genres: React.PropTypes.array.isRequired,
-    movies: React.PropTypes.object
+    movies: React.PropTypes.array
   }
   constructor(props) {
     super(props)
@@ -14,7 +14,7 @@ export default class MovieList extends Component {
   render() {
     return (
       <div className="me-movie-list">
-        {this.props.movies && this.props.movies.results.map(m => {
+        {this.props.movies.map(m => {
           const average = Math.round(m.vote_average * 10) / 10
           return <div className="me-movie" key={m.id}>
             <div className="me-movie__poster__score">{average}</div>

@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import MovieList from './MovieList'
 
-import './AllMoviesList.scss'
+import './Watchlist.scss'
 
-export default class AllMoviesList extends Component {
+export default class Watchlist extends Component {
   static propTypes = {
-    genres: React.PropTypes.array
+    genres: React.PropTypes.array,
+    watchlist: React.PropTypes.array
   }
   constructor(props) {
     super(props)
@@ -15,12 +16,10 @@ export default class AllMoviesList extends Component {
     }
   }
   componentDidMount() {
-    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.TMDB_API_KEY}`)
-    .then(r => r.json())
-    .then(blob => {
-      this.setState({
-        movies: blob
-      })
+    this.setState({
+      movies: {
+        results: this.props.watchlist
+      }
     })
   }
   render() {
@@ -36,7 +35,7 @@ export default class AllMoviesList extends Component {
           <div className="me-all__header">
             <div className="me-all__header__row">
               <div className="me-all__header__title">
-                <h1>All Movies</h1>
+                <h1>My Watchlist</h1>
               </div>
               <div className="me-all__header__search">
                 <div className="me-all__header__search__wrapper">

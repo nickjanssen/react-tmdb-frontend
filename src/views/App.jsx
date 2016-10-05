@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Sidebar from './Sidebar'
+import EventEmitter from 'events'
 
 import './App.scss'
 
@@ -11,21 +12,56 @@ export default class App extends Component {
   constructor(props) {
     super(props)
 
+    this.emitter = new EventEmitter()
+
     this.state = {
-      genres: null
+      genres: null,
+      watchlist: []
+    }
+
+    this.emitter.on('addToWatchList', (movie) => {
+      // Add genre_ids ourselves as we need to create a custom list from detail
+      // API responses, and genre_ids is not available there
+      movie.genre_ids = movie.genres.map(g => g.id)
+
+      this.setState({
+        watchlist: [
+          ...this.state.watchlist,
+          movie
+        ]
+      })
+      setTimeout(this.saveWatchlist.bind(this), 0)
+    })
+
+    this.emitter.on('removeFromWatchList', (movie) => {
+      const newWatchlist = this.state.watchlist.filter(m => m.id !== movie.id)
+      this.setState({
+        watchlist: newWatchlist
+      })
+      setTimeout(this.saveWatchlist.bind(this), 0)
+    })
+  }
+  saveWatchlist() {
+    localStorage.setItem('watchlist', JSON.stringify(this.state.watchlist))
+  }
+  loadWatchlist() {
+    const savedWatchlist = localStorage.getItem('watchlist')
+    if (savedWatchlist) {
+      this.setState({
+        watchlist: JSON.parse(savedWatchlist)
+      })
     }
   }
   componentDidMount() {
-    // fetch(`https://api.themoviedb.org/3${'/genre/movie/list'}?api_key=${process.env.TMDB_API_KEY}`)
-    // .then(r => r.json())
-    // .then(blob => {
-    //   console.log(blob)
-    // })
-    setTimeout(() => {
+    this.loadWatchlist()
+
+    fetch(`https://api.themoviedb.org/3${'/genre/movie/list'}?api_key=${process.env.TMDB_API_KEY}`)
+    .then(r => r.json())
+    .then(blob => {
       this.setState({
-        genres: {"genres":[{"id":28,"name":"Action"},{"id":12,"name":"Adventure"},{"id":16,"name":"Animation"},{"id":35,"name":"Comedy"},{"id":80,"name":"Crime"},{"id":99,"name":"Documentary"},{"id":18,"name":"Drama"},{"id":10751,"name":"Family"},{"id":14,"name":"Fantasy"},{"id":36,"name":"History"},{"id":27,"name":"Horror"},{"id":10402,"name":"Music"},{"id":9648,"name":"Mystery"},{"id":10749,"name":"Romance"},{"id":878,"name":"Science Fiction"},{"id":10770,"name":"TV Movie"},{"id":53,"name":"Thriller"},{"id":10752,"name":"War"},{"id":37,"name":"Western"}]}.genres // eslint-disable-line
+        genres: blob.genres
       })
-    }, 1000)
+    })
   }
   render() {
     const isLoading = this.state.genres === null
@@ -39,7 +75,9 @@ export default class App extends Component {
               <i className="fa fa-refresh fa-spin" aria-hidden="true"></i>
             </div>
           : React.Children.map(this.props.children, child => React.cloneElement(child, {
-            genres: this.state.genres
+            genres: this.state.genres,
+            watchlist: this.state.watchlist,
+            emitter: this.emitter
           }))}
         </div>
       </div>
