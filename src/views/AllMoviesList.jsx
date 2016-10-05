@@ -11,16 +11,26 @@ export default class AllMoviesList extends Component {
     super(props)
 
     this.state = {
-      movies: null
+      movies: []
     }
+
+    this.isLoadingNewMovies = false
+    this.nextPageToLoadMoviesFrom = 1
   }
   componentDidMount() {
-    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.TMDB_API_KEY}`)
+    this.loadNewMovies()
+  }
+  loadNewMovies() {
+    if (this.isLoadingNewMovies) return
+    this.isLoadingNewMovies = true
+    fetch(`https://api.themoviedb.org/3/discover/movie?page=${this.nextPageToLoadMoviesFrom}&api_key=${process.env.TMDB_API_KEY}`)
     .then(r => r.json())
     .then(blob => {
       this.setState({
-        movies: blob
+        movies: [...this.state.movies, ...blob.results]
       })
+      this.isLoadingNewMovies = false
+      this.nextPageToLoadMoviesFrom++
     })
   }
   render() {
@@ -53,8 +63,12 @@ export default class AllMoviesList extends Component {
               </div>
             </div>
           </div>
-          <div className="me-all__content">
-            <MovieList movies={this.state.movies.results} genres={this.props.genres} />
+          <div className="me-all__content" onScroll={(o) => {
+            if(o.target.offsetHeight + o.target.scrollTop >= o.target.scrollHeight - 100) {
+              this.loadNewMovies()
+            }
+          }}>
+            <MovieList movies={this.state.movies} genres={this.props.genres} />
           </div>
         </div>
     }
