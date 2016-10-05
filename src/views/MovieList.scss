@@ -6,6 +6,12 @@
   margin-right: 60px;
   display: inline-block;
   position: relative;
+  vertical-align: top;
+
+  .me-button {
+    width: 100%;
+    margin-bottom: 20px;
+  }
 }
 
 .me-movie__poster {
@@ -46,7 +52,8 @@
 .me-movie__details {
   font-size: 12px;
   overflow: auto;
-  height: 100px;
+  padding-bottom: 20px;
+  height: 70px;
 }
 
 .me-movie__details__title {

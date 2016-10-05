@@ -14,28 +14,24 @@ const orderByOptions = [
 export default class Watchlist extends Component {
   static propTypes = {
     genres: React.PropTypes.array,
-    watchlist: React.PropTypes.array
+    watchlist: React.PropTypes.array,
+    emitter: React.PropTypes.object
   }
   constructor(props) {
     super(props)
 
     this.state = {
-      movies: null,
       orderBy: 'popularity.desc',
       filterBy: null,
       filterQuery: null
     }
   }
-  componentDidMount() {
-    this.setState({
-      movies: this.props.watchlist
-    })
-  }
   render() {
-    const isLoading = this.state.movies === null
+
+    const isLoading = this.props.watchlist === null
 
     // Apply local sorting and filtering
-    let filteredMovies = _.sortBy(this.state.movies, this.state.orderBy.split('.')[0])
+    let filteredMovies = _.sortBy(this.props.watchlist, this.state.orderBy.split('.')[0])
 
     const filterOptions = this.props.genres.map((g) => {
       return {
@@ -110,7 +106,7 @@ export default class Watchlist extends Component {
           </div>
           </div>
           <div className="me-all__content">
-            <MovieList movies={filteredMovies} genres={this.props.genres} />
+            <MovieList movies={filteredMovies} genres={this.props.genres} showWatchListRemovalButton={true} emitter={this.props.emitter} />
           </div>
         </div>
     }

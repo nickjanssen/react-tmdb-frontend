@@ -6,7 +6,9 @@ import './MovieList.scss'
 export default class MovieList extends Component {
   static propTypes = {
     genres: React.PropTypes.array.isRequired,
-    movies: React.PropTypes.array
+    movies: React.PropTypes.array,
+    showWatchListRemovalButton: React.PropTypes.bool,
+    emitter: React.PropTypes.object
   }
   constructor(props) {
     super(props)
@@ -14,6 +16,7 @@ export default class MovieList extends Component {
   render() {
     return (
       <div className="me-movie-list">
+        {this.props.movies.length === 0 && 'No movies added to your watchlist yet!'}
         {this.props.movies.map(m => {
           const average = Math.round(m.vote_average * 10) / 10
           return m.poster_path && <div className="me-movie" key={m.id}>
@@ -33,6 +36,11 @@ export default class MovieList extends Component {
                   .map(g => g.name).join(', ')}
               </div>
             </div>
+            {this.props.showWatchListRemovalButton && <button className={'me-button'} onClick={() => {
+              this.props.emitter.emit('removeFromWatchList', m)
+            }}>
+              Remove from list
+            </button> }
           </div>
         })}
       </div>
