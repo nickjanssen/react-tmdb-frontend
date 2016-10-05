@@ -11,6 +11,12 @@
   flex-direction: column;
 }
 
+@media (max-width: 1023px) {
+  .me-movie-detail__main-left {
+    display: none;
+  }
+}
+
 .me-movie-detail__main-left__fixed-wrapper {
   height: 390px;
 }
@@ -84,12 +90,13 @@
 
 .me-movie-detail__main-right__info {
   width: 100%;
-  max-width: 600px;
+  
   height: 400px;
   // background: red;
   // margin-top: 20px;
   padding: 20px 40px;
   box-sizing: border-box;
+  overflow: auto;
 }
 
 .me-movie-detail__main-right__info__title {

@@ -21,11 +21,28 @@ body, input, button {
   text-transform: uppercase;
   font-weight: bold;
   border: 0;
+
+  &:hover {
+    background: lighten($darkergray, 10%);
+  }
 }
 
 .me-button-primary {
   color: $darkergray;
   background: $yellow;
+
+  &:hover {
+    background: lighten($yellow, 20%);
+  }
+}
+
+.me-button-info {
+  color: white;
+  background: $info;
+
+  &:hover {
+    background: darken($info, 20%);
+  }
 }
 
 .me-button-flex {
@@ -37,6 +54,6 @@ body, input, button {
   color: $yellow;
 }
 
-a {
+a, .me-button {
   cursor: pointer;
 }

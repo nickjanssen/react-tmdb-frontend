@@ -2,7 +2,7 @@
 @import '../variables';
 
 .me-sidebar {
-  width: 85px;
+  min-width: 85px;
   background: $yellow;
 }
 
