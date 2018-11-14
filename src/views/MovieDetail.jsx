@@ -73,7 +73,7 @@ export default class MovieDetail extends Component {
         <div className="me-movie-detail__main-left">
           <div className="me-movie-detail__main-left__fixed-wrapper">
             <div className="me-movie-detail__main-left__main-poster" style={{
-              backgroundImage: `url(https://image.tmdb.org/t/p/w600${m.poster_path})`
+              backgroundImage: `url(https://image.tmdb.org/t/p/w780${m.poster_path})`
             }} />
             <div className="me-movie-detail__main-left__main-poster--border"/>
             <div className="me-movie-detail__main-left__details">
@@ -109,7 +109,7 @@ export default class MovieDetail extends Component {
                     'me-movie-detail__main-left__backdrop-wide': i % 2 === 0,
                     'me-movie-detail__main-left__backdrop-narrow': i % 2 === 1
                   })} style={{
-                    backgroundImage: `url(https://image.tmdb.org/t/p/w600${bD[0].file_path})`
+                    backgroundImage: `url(https://image.tmdb.org/t/p/w780${bD[0].file_path})`
                   }} onClick={() => {
                     this.setState({
                       slideshow: {
@@ -123,7 +123,7 @@ export default class MovieDetail extends Component {
                     'me-movie-detail__main-left__backdrop-wide': i % 2 === 1,
                     'me-movie-detail__main-left__backdrop-narrow': i % 2 === 0
                   })}  style={{
-                    backgroundImage: `url(https://image.tmdb.org/t/p/w600${bD[1].file_path})`
+                    backgroundImage: `url(https://image.tmdb.org/t/p/w780${bD[1].file_path})`
                   }} onClick={() => {
                     this.setState({
                       slideshow: {
@@ -181,7 +181,7 @@ export default class MovieDetail extends Component {
                   return <tr key={i}>
                     <td>
                       {c.profile_path && <div className="photo" style={{
-                        backgroundImage: `url(https://image.tmdb.org/t/p/w90${c.profile_path})`
+                        backgroundImage: `url(https://image.tmdb.org/t/p/w92${c.profile_path})`
                       }}></div>}
                     </td>
                     <td className="info">{c.name}</td>
@@ -226,7 +226,7 @@ export default class MovieDetail extends Component {
               src={`https://www.youtube.com/embed/${videos[this.state.slideshow.index].key}?autoplay=1`}
             allowFullScreen></iframe>}
             {this.state.slideshow.type === 'image' && <img className="me-modal__image"
-              src={`https://image.tmdb.org/t/p/w1000${previewBackdrops[this.state.slideshow.index].file_path}`} />}
+              src={`https://image.tmdb.org/t/p/w1280${previewBackdrops[this.state.slideshow.index].file_path}`} />}
           </div>
         </div>}
       </div>
